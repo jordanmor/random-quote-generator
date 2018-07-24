@@ -1,6 +1,9 @@
 // FSJS - Random Quote Generator
 
-// Create the array of quote objects and name it quotes
+/*=============-=============-=============-=============
+                       PROJECT DATA
+===============-=============-=============-===========*/
+
 const quotes = [
   {
       text: "How lucky I am to have something that makes saying goodbye so hard.",
@@ -52,16 +55,32 @@ const quotes = [
   }
 ];
 
-const quoteBox = document.getElementById('quote-box');
+/*=============-=============-=============-=============
+                      GLOBAL VARIABLES
+===============-=============-=============-===========*/
 
-// Create the getRandomQuote function and name it getRandomQuote
-function getRandomQuote(array) {
-  const randomIndex =  Math.floor(Math.random() * array.length);
-  return array[randomIndex];
+const quoteBox = document.getElementById('quote-box');
+const body = document.querySelector('body');
+
+/*=============-=============-=============-=============
+                        FUNCTIONS
+===============-=============-=============-===========*/
+
+// Creates a random number from 0 up to, but not including, the selected number
+const createRandomNum = num => Math.floor(Math.random() * num);
+
+// A function to capitalize the first letter of a string
+const capitalize = str => str.charAt(0).toUpperCase() + str.substring(1);
+
+// Changes the body's background color with random rgb numbers from 0 to 255;
+const randomBgColor = () => {
+  let r = createRandomNum(256), g = createRandomNum(256), b = createRandomNum(256);
+  body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
 
+// Returns a random quote from the quotes array using a random index number;
+const getRandomQuote = array => array[createRandomNum(array.length)];
 
-// Create the printQuote function and name it printQuote
 function printQuote() {
   const quote = getRandomQuote(quotes);
   let html = '';
@@ -79,16 +98,13 @@ function printQuote() {
     html += `<p class="tags">${str}</p>`;
   }
   quoteBox.innerHTML = html;
-}
-
-// A function to capitalize the first letter of a string
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.substring(1);
+  randomBgColor();
 }
 
 printQuote();
 
+/*=============-=============-=============-=============
+                    EVENT LISTENERS
+===============-=============-=============-===========*/
 
-// This event listener will respond to "Show another quote" button clicks
-// when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
