@@ -55,13 +55,15 @@ const quotes = [
 const quoteBox = document.getElementById('quote-box');
 
 // Create the getRandomQuote function and name it getRandomQuote
-
+function getRandomQuote(array) {
+  const randomIndex =  Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
 
 
 // Create the printQuote function and name it printQuote
 function printQuote() {
-
-  const quote = quotes[0];
+  const quote = getRandomQuote(quotes);
   let html = '';
   html += `<p class="quote">${quote.text}</p>`;
   html += `<p class="source">${quote.source}`;
@@ -72,12 +74,14 @@ function printQuote() {
     html += `<span class="year">${quote.year}</span></p>`;
   }
   if (quote.tags) {
+    // capitalize each tag from the tag array and join together into one string
     const str = quote.tags.map(capitalize).join(', ');
     html += `<p class="tags">${str}</p>`;
   }
   quoteBox.innerHTML = html;
 }
 
+// A function to capitalize the first letter of a string
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.substring(1);
 }
