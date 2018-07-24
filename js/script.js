@@ -72,10 +72,14 @@ function printQuote() {
     html += `<span class="year">${quote.year}</span></p>`;
   }
   if (quote.tags) {
-    const str = quote.tags.join(', ');
+    const str = quote.tags.map(capitalize).join(', ');
     html += `<p class="tags">${str}</p>`;
   }
   quoteBox.innerHTML = html;
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1);
 }
 
 printQuote();
