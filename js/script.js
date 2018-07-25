@@ -61,6 +61,8 @@ const quotes = [
 
 const quoteBox = document.getElementById('quote-box');
 const body = document.querySelector('body');
+const button = document.getElementById('loadQuote');
+const quoteSpeed = 2000;
 
 /*=============-=============-=============-=============
                         FUNCTIONS
@@ -73,38 +75,56 @@ const createRandomNum = num => Math.floor(Math.random() * num);
 const capitalize = str => str.charAt(0).toUpperCase() + str.substring(1);
 
 // Changes the body's background color with random rgb numbers from 0 to 255;
-const randomBgColor = () => {
+function randomBgColor() {
   let r = createRandomNum(256), g = createRandomNum(256), b = createRandomNum(256);
   body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
 
 // Returns a random quote from the quotes array using a random index number;
-const getRandomQuote = array => array[createRandomNum(array.length)];
+function getRandomQuote(array) {
+  const randomIndex = createRandomNum(array.length);
+  return array[randomIndex];
+}
 
 function printQuote() {
   const quote = getRandomQuote(quotes);
+  // Use object destructuring for cleaner code
+  const { text, source, citation, year, tags} = quote;
+
   let html = '';
-  html += `<p class="quote">${quote.text}</p>`;
-  html += `<p class="source">${quote.source}`;
-  if (quote.citation) {
-    html += `<span class="citation">${quote.citation}</span>`;
+  html += `<p class="quote">${text}</p>`;
+  html += `<p class="source">${source}`;
+  if (citation) {
+    html += `<span class="citation">${citation}</span>`;
   }
-  if (quote.year) {
-    html += `<span class="year">${quote.year}</span></p>`;
+  if (year) {
+    html += `<span class="year">${year}</span></p>`;
   }
-  if (quote.tags) {
+  if (tags) {
     // capitalize each tag from the tag array and join together into one string
-    const str = quote.tags.map(capitalize).join(', ');
+    const str = tags.map(capitalize).join(', ');
     html += `<p class="tags">${str}</p>`;
   }
+  
   quoteBox.innerHTML = html;
   randomBgColor();
 }
 
+/*=============-=============-=============-=============
+                       PROGRAM INIT
+===============-=============-=============-===========*/
+
+// printQuote() is called to compensate for initial setInterval delay
 printQuote();
+let timer = setInterval( printQuote, quoteSpeed);
 
 /*=============-=============-=============-=============
                     EVENT LISTENERS
 ===============-=============-=============-===========*/
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+// Every time button is clicked, the timer is cleared and reset
+button.addEventListener('click', () => {
+  clearInterval(timer);
+  printQuote();
+  timer = setInterval( printQuote, quoteSpeed);
+}, false);
