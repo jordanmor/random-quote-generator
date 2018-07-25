@@ -62,7 +62,7 @@ const quotes = [
 const quoteBox = document.getElementById('quote-box');
 const body = document.querySelector('body');
 const button = document.getElementById('loadQuote');
-const quoteSpeed = 2000;
+const quoteSpeed = 20000;
 
 /*=============-=============-=============-=============
                         FUNCTIONS
