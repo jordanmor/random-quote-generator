@@ -46,5 +46,23 @@ const quotes = [
     quote: "Little by little does the trick",
     source: "Aesop",
     tags: ["fables"]
+  },
+  {
+    quote: "It does not do well to dwell on dreams and forget to live.",
+    source: "J.K. Rowling",
+    citation: "Harry Potter and the Sorcerer's Stone",
+    year: 1998,
+    tags: ["children's literature", "fantasy"]
+  },
+  {
+    quote: "No act of kindness, no matter how small, is ever wasted.",
+    source: "Aesop",
+    citation: "Aesop’s Fables The Lion and the Mouse",
+    tags: ["fables"]
+  },
+  {
+    quote: "There is no living thing that is not afraid when it faces danger. True courage is in facing danger when you are afraid.",
+    source: "L.Frank Baum",
+    citation: "The Wizard of Oz"
   }
 ];
